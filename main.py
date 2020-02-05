@@ -91,4 +91,10 @@ def respond(voice_data):
     #6: search on YouTube
     if there_exists(["search for"]) and 'youtube' not in voice_data:
         search_term = voice_data.split("for")[-1]
-        url = f"https://youtube.com/sea"
+        url = f"https://youtube.com/results?search_query={search_term}"
+        webbrowser.get().open(url)
+        speak(f'Here is what I found for {search_term} on YouTube')
+
+    #7: get stock price
+    if there_exists(["price of"]):
+        search_term = voice_data.lower().split(" of ")
