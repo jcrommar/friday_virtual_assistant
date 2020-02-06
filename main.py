@@ -97,4 +97,29 @@ def respond(voice_data):
 
     #7: get stock price
     if there_exists(["price of"]):
-        search_term = voice_data.lower().split(" of ")
+        search_term = voice_data.lower().split(" of ")[-1].strip()
+        stocks = {
+            "apple":"APPL",
+            "microsoft":"MSFT",
+            "facebook":"FB",
+            "tesla":"TSLA",
+            "bitcoin":"BTC-USD"
+        }
+        try:
+            stock = stocks[search_term]
+            stock = yf.Ticker(stock)
+            price = stock.info["regularMarketPrice"]
+
+            speak(f'price of {search_term} is {price} {stock.info["currency"]} {person_obj.name}')
+        except:
+            speak('oops, something went wrong')
+    if there_exist(["exit", "quit", "goodbye"]):
+        speak("going offline")
+        exit()
+
+time.sleep(1)
+
+person_obj = person()
+while(1):
+    voice_date = record_audio() #get the voice output
+    respond(voice_data) #respond
