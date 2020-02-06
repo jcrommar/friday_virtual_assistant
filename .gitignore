@@ -1,3 +1,4 @@
+get-pip.py
 env/bin/epylint
 env/bin/isort
 env/bin/pylint
